@@ -21,16 +21,16 @@ class TestRoom < Minitest::Test
 
     @room_playlist = [@song1, @song2, @song3, @song4]
 
-    @guest1 = Guest.new("Angus")
-    @guest2 = Guest.new("Paul")
-    @guest3 = Guest.new("Bob")
-    @guest4 = Guest.new("Bruce")
+    @guest1 = Guest.new("Angus", 25)
+    @guest2 = Guest.new("Paul", 50)
+    @guest3 = Guest.new("Bob", 100)
+    @guest4 = Guest.new("Bruce", 8)
 
 
-    @Room1 = Room.new("Dylan", @room_playlist, 0, 10)
-    @Room2 = Room.new("AC/DC", @room_playlist, 0, 10)
-    @Room3 = Room.new("Free", @room_playlist, 0, 10)
-    @Room4 = Room.new("Springsteen", @room_playlist, 0, 10)
+    @Room1 = Room.new("Dylan", @room_playlist, 0, 10, 25)
+    @Room2 = Room.new("AC/DC", @room_playlist, 0, 8, 25)
+    @Room3 = Room.new("Free", @room_playlist, 0, 2, 25)
+    @Room4 = Room.new("Springsteen", @room_playlist, 0, 10, 25)
 
 
 
@@ -69,4 +69,25 @@ class TestRoom < Minitest::Test
       @Room2.add_song_to_room(@new_song)
       assert_equal(5, @Room2.playlist.count)
     end
+
+    def test_add_guests_no_room()
+        @Room3.add_to_guests(@guest1)
+        @Room3.add_to_guests(@guest2)
+        @Room3.add_to_guests(@guest3)
+        assert_equal(2, @Room3.guest_count.length())
+
+
+      end
+
+      def test_entry_fee_to_room_enough_money()
+        @Room2.entry_fee_to_room(@guest4)
+        assert_equal(25, @Room2.entry_fee)
+
+
+      end
+      def test_entry_fee_to_room_not_enough_money()
+        @Room2.entry_fee_to_room(@guest3)
+        assert_equal(25, @Room2.entry_fee)
+
+end
 end

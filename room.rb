@@ -1,12 +1,13 @@
 class Room
-  attr_reader :name, :playlist, :capacity, :guest_count
+  attr_reader :name, :playlist, :capacity, :guest_count, :entry_fee
 
 
-  def initialize(name, playlist, guest_count, capacity)
+  def initialize(name, playlist, guest_count, capacity, entry_fee)
     @name = name
     @playlist = playlist
     @guest_count = []
     @capacity = capacity
+    @entry_fee = entry_fee
 
 end
 
@@ -19,7 +20,7 @@ end
 def add_to_guests(guest)
    if @guest_count.length < @capacity
      @guest_count << (guest)
-    
+
    else
      p "Sorry mate, no room at the Inn"
 
@@ -35,5 +36,21 @@ def add_to_guests(guest)
     return @playlist.push(song)
   end
 
+  def add_guests_no_room(guest)
+    if @guest_count.length < @capacity
+      @guest_count << (guest)
 
+    else
+      p "Sorry mate, no room at the Inn"
+
+    end
+  end
+
+  def entry_fee_to_room(guest)
+    if guest.wallet >= entry_fee
+      p "Welcome to the room"
+    else
+      p "Sorry you do not have enough money"
+  end
+end
 end
