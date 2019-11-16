@@ -19,13 +19,15 @@ end
 def add_to_guests(guest)
    if @guest_count.length < @capacity
      @guest_count << (guest)
+    
    else
      p "Sorry mate, no room at the Inn"
+
    end
  end
 
  def remove_guest_from_room(guest)
-   return @guest_count.delete(guest)
+   @guest_count.delete(guest)
 
  end
 
